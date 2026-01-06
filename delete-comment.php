@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . '/libraries/utils.php';
+require_once('libraries/database.php');
+require_once('libraries/utils.php');
+require_once('libraries/models/Article.php');
+require_once('libraries/models/Comment.php');
 
 /**
  * DANS CE FICHIER ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !

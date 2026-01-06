@@ -1,6 +1,10 @@
 <?php
-require_once __DIR__ . '/libraries/utils.php';
-require_once __DIR__ . '/libraries/database.php';
+require_once('libraries/database.php');
+require_once('libraries/utils.php');
+require_once('libraries/models/Article.php');
+require_once('libraries/models/Comment.php');
+$articleModel = new Article();
+$commentModel = new Comment();
 
 /**
  * 1. Récupération du param "id" et vérification de celui-ci
@@ -17,15 +21,13 @@ if (!$article_id) {
 /**
  * 2. Récupération de l'article
  */
-$article = findArticle($article_id);
-if (!$article) {
-    die("Article introuvable !");
-}
+$article = $articleModel->findArticle($article_id);
 
 /**
  * 3. Récupération des commentaires
  */
-$commentaires = findAllComments($article_id);
+$commentaires= $commentModel->findAllComments($article_id);
+
 
 /**
  * 4. Affichage
