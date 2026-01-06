@@ -66,8 +66,4 @@ $commentaires = $query->fetchAll();
  * 5. On affiche 
  */
 $pageTitle = $article['title'];
-ob_start();
-require('templates/articles/show.html.php');
-$pageContent = ob_get_clean();
-
-require('templates/layout.html.php');
+render('articles/show', compact('pageTitle', 'article', 'commentaires','article_id'));
