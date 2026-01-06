@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/libraries/utils.php';
 /**
  * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
  * 
