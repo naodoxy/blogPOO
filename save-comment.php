@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/libraries/utils.php';
+require_once __DIR__ . '/libraries/database.php';
 
 /**
  * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE EST REDIRIGER SUR L'ARTICLE !
@@ -58,17 +59,13 @@ if (!$author || !$article_id || !$content) {
  */
 $pdo = getPdo();
 
-$query = $pdo->prepare('SELECT * FROM articles WHERE id = :article_id');
-$query->execute(['article_id' => $article_id]);
+$article = findArticle($article_id);
 
-// Si rien n'est revenu, on fait une erreur
-if ($query->rowCount() === 0) {
-    die("Attention ! L'article $article_id n'existe !");
+if (!$article) {
+    die("Ho ! L'article $article_id n'existe pas !");
 }
 
 // 3. Insertion du commentaire
-$query = $pdo->prepare('INSERT INTO comments SET author = :author, content = :content, article_id = :article_id, created_at = NOW()');
-$query->execute(compact('author', 'content', 'article_id'));
-
-// 4. Redirection vers l'article en question :
+$insertComment($author, $content, $article_id);
+// 4. Redirection vers l'article en question :s
 redirect('article.php?id=' . $article_id);
